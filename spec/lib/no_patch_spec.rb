@@ -55,6 +55,22 @@ describe NoPatch do
           end
         }.to raise_error NoPatch::RedifinitionError
       end
+
+      it "raises an error when being removed" do
+        expect {
+          class Klass
+            remove_method :foo
+          end
+        }.to raise_error NoPatch::RedifinitionError
+      end
+
+      it "raises an error when being undefined" do
+        expect {
+          class Klass
+            undef :foo
+          end
+        }.to raise_error NoPatch::RedifinitionError
+      end
     end
 
     context "class methods" do
@@ -71,6 +87,26 @@ describe NoPatch do
         expect {
           class Klass
             def self.bar
+            end
+          end
+        }.to raise_error NoPatch::RedifinitionError
+      end
+
+      it "raises an error when being removed" do
+        expect {
+          class Klass
+            class << self
+              remove_method :bar
+            end
+          end
+        }.to raise_error NoPatch::RedifinitionError
+      end
+
+      it "raises an error when being undefined" do
+        expect {
+          class Klass
+            class << self
+              undef :bar
             end
           end
         }.to raise_error NoPatch::RedifinitionError

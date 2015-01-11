@@ -13,6 +13,16 @@ module NoPatch
       super
     end
 
+    def klass.method_removed(sym)
+      super
+      raise RedifinitionError
+    end
+
+    def klass.method_undefined(sym)
+      super
+      raise RedifinitionError
+    end
+
     # Heads up, this calls itself after being defined
     def klass.singleton_method_added(sym)
       @immutable_class_methods ||= []
@@ -21,7 +31,15 @@ module NoPatch
       super
     end
 
+    def klass.singleton_method_removed(sym)
+      super
+      raise RedifinitionError
+    end
+
+    def klass.singleton_method_undefined(sym)
+      super
+      raise RedifinitionError
+    end
+
   end
-
-
 end

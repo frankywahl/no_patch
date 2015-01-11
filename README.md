@@ -46,7 +46,10 @@ end
 
 #=> raises NoPath::RedifinitionError 
 ```
-
+## Code Status
+[![Build Status](https://travis-ci.org/frankywahl/no_patch.svg?branch=master)](https://travis-ci.org/frankywahl/no_patch)
+[![Code Climate](https://codeclimate.com/github/frankywahl/no_patch/badges/gpa.svg)](https://codeclimate.com/github/frankywahl/no_patch)
+[![Test Coverage](https://codeclimate.com/github/frankywahl/no_patch/badges/coverage.svg)](https://codeclimate.com/github/frankywahl/no_patch)
 
 ## Contributing
 

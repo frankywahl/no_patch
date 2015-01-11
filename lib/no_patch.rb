@@ -43,3 +43,51 @@ module NoPatch
 
   end
 end
+
+# https://rawgit.com/booch/presentations/master/ruby_idioms/slides.html#34
+module NoPatchFactory
+
+  class RedifinitionError < StandardError; end
+
+  def self.module(error_block: ->{})
+    Module.new do
+      module_eval %{
+        def error_message
+          puts "Entering"
+          puts #{error_block}
+          puts "Leaving"
+        end
+      }
+
+      def self.included(klass)
+        klass.instance_eval do
+          def method_added(sym)
+            @immutable_instance_methods ||= []
+            send(:error_message) if @immutable_instance_methods.include? sym
+            @immutable_instance_methods << sym
+            super
+          end
+
+        end
+      end
+
+    end
+  end
+end
+
+
+class Foo
+  include NoPatchFactory.module(error_block: -> { raise "FOO" } )
+
+  def brew
+  end
+end
+
+class Foo
+  #def brew
+  #end
+end
+
+puts Foo.methods(false)
+puts Foo.instance_methods(false)
+

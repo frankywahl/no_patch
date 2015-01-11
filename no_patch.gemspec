@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.version       = NoPatch::VERSION
   spec.authors       = ["Franky W."]
   spec.email         = ["frankywahl@users.noreply.github.com"]
-  spec.summary       = %q{Todo}
-  spec.description   = %q{Optional.}
+  spec.summary       = %q{Raise messages on monkey patching}
+  spec.description   = %q{This tools allows for monkey patching of classes to be prevented}
   spec.homepage      = ""
   spec.license       = "MIT"
 

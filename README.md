@@ -1,6 +1,6 @@
 # NoPatch
 
-TODO: Write a gem description
+Prevent monkey patching of classes
 
 ## Installation
 
@@ -20,7 +20,33 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Include it as a module to any class. 
+
+```ruby 
+class MyClass
+	include NoPatch
+end
+```
+
+Now, it should raise errors when redefining a method that is already existent. 
+
+```ruby
+class MyClass
+	def foo
+		puts "all good here"
+	end
+end
+# => :foo
+
+class MyClass
+	def foo
+		puts "Redefining" 
+	end
+end
+
+#=> raises NoPath::RedifinitionError 
+```
+
 
 ## Contributing
 

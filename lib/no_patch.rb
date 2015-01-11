@@ -1,5 +1,4 @@
 require "no_patch/version"
-require 'pry'
 
 module NoPatch
 
@@ -34,30 +33,3 @@ module NoPatch
 
 
 end
-
-# https://rawgit.com/booch/presentations/master/ruby_idioms/slides.html#34
-module NoPatchBis
-  def self.messages(added: ->{})
-    Module.new.tap do |mod|
-
-    end
-  end
-end
-
-
-#class Foo
-#  include NoPatch
-#  def par
-#  end
-#  def self.brew
-#
-#  end
-#end
-#
-##
-##
-#class Foo
-#  def self.brew
-#
-#  end
-#end

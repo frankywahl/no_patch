@@ -24,6 +24,7 @@ describe NoPatch do
 
   end
   context "including the module" do
+
     before(:each) do
       class Klass
         include NoPatch
@@ -53,7 +54,7 @@ describe NoPatch do
             def foo
             end
           end
-        }.to raise_error NoPatch::RedifinitionError
+        }.to raise_error NoPatch::RedifinitionError, "Method Klass#foo cannot be redefined"
       end
 
       it "raises an error when being removed" do
@@ -61,7 +62,7 @@ describe NoPatch do
           class Klass
             remove_method :foo
           end
-        }.to raise_error NoPatch::RedifinitionError
+        }.to raise_error NoPatch::RedifinitionError, "Method Klass#foo cannot be removed"
       end
 
       it "raises an error when being undefined" do
@@ -69,7 +70,7 @@ describe NoPatch do
           class Klass
             undef :foo
           end
-        }.to raise_error NoPatch::RedifinitionError
+        }.to raise_error NoPatch::RedifinitionError, "Method Klass#foo cannot be undefined"
       end
     end
 
@@ -89,7 +90,7 @@ describe NoPatch do
             def self.bar
             end
           end
-        }.to raise_error NoPatch::RedifinitionError
+        }.to raise_error NoPatch::RedifinitionError, "Method Klass::bar cannot be redefined"
       end
 
       it "raises an error when being removed" do
@@ -99,7 +100,7 @@ describe NoPatch do
               remove_method :bar
             end
           end
-        }.to raise_error NoPatch::RedifinitionError
+        }.to raise_error NoPatch::RedifinitionError, "Method Klass::bar cannot be removed"
       end
 
       it "raises an error when being undefined" do
@@ -109,8 +110,35 @@ describe NoPatch do
               undef :bar
             end
           end
-        }.to raise_error NoPatch::RedifinitionError
+        }.to raise_error NoPatch::RedifinitionError, "Method Klass::bar cannot be undefined"
       end
+    end
+
+    context "inheriting from a class" do
+      after(:each)do
+        Object.send(:remove_const, :ChildKlass)
+      end
+
+      it "instance methods can be redefined a child" do
+        expect{
+          class ChildKlass < Klass
+            def foo
+              puts "ok"
+            end
+          end
+        }.not_to raise_error
+      end
+
+      it "class methods can be redefined a child" do
+        expect{
+          class ChildKlass < Klass
+            def self.bar
+              puts "ok"
+            end
+          end
+        }.not_to raise_error
+      end
+
     end
   end
 end

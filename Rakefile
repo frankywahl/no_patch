@@ -26,7 +26,7 @@ end
 
 require 'rdoc/task'
 RDoc::Task.new do |rdoc|
-  rdoc.title = "super_hooks"
+  rdoc.title = "NoPatch"
 end
 task :doc => :rdoc
 

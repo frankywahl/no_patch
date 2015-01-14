@@ -21,9 +21,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'rdoc'
-  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'pry', "~> 0.10.1"
+  spec.add_development_dependency 'rdoc', "~> 4.2"
+  spec.add_development_dependency 'rspec', "~> 3.0"
   spec.add_development_dependency 'rubygems-tasks', '~> 0.2'
   spec.add_development_dependency 'codeclimate-test-reporter'
 end

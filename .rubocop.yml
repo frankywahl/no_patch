@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    - no_patch.gemspec 
+
+Documentation:
+  Enabled: false
+
+LineLength:
+  Enabled: true
+  Max: 140

@@ -33,7 +33,12 @@ task doc: :rdoc
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
 
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new do |task|
+  task.requires << 'rubocop-rspec'
+end
+
 task test: :spec
-task default: :spec
+task default: [:spec, :rubocop]
 
 task rebuild: [:build, :install]

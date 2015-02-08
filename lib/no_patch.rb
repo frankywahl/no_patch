@@ -1,4 +1,4 @@
-require "no_patch/version"
+require 'no_patch/version'
 
 # The no patch module provides a way to avoid a class from being monkey patched.
 # An example of that would be shared code between two objects. You would not want
@@ -36,11 +36,9 @@ require "no_patch/version"
 #   a.foo # => "ok"
 #
 module NoPatch
-
   # A specific error class
   #
   class RedifinitionError < StandardError; end
-
 
   # Used by including it in a class.
   # This is the hook that will be run each time a class includes it.
@@ -51,42 +49,44 @@ module NoPatch
   #     include NoPatch
   #   end
   #
-  def self.included(klass) # :nodoc:
+  def self.included(klass)
+    klass.extend(ClassMethods)
+  end
 
-    def klass.method_added(sym)
+  module ClassMethods
+    def method_added(sym)
       @immutable_instance_methods ||= []
-      raise RedifinitionError, "Method #{self}##{sym.to_s} cannot be redefined" if @immutable_instance_methods.include? sym
+      fail RedifinitionError, "Method #{self}##{sym} cannot be redefined" if @immutable_instance_methods.include? sym
       @immutable_instance_methods << sym
       super
     end
 
-    def klass.method_removed(sym)
+    def method_removed(sym)
       super
-      raise RedifinitionError, "Method #{self}##{sym.to_s} cannot be removed"
+      fail RedifinitionError, "Method #{self}##{sym} cannot be removed"
     end
 
-    def klass.method_undefined(sym)
+    def method_undefined(sym)
       super
-      raise RedifinitionError, "Method #{self}##{sym.to_s} cannot be undefined"
+      fail RedifinitionError, "Method #{self}##{sym} cannot be undefined"
     end
 
     # Heads up, this calls itself after being defined
-    def klass.singleton_method_added(sym)
+    def singleton_method_added(sym)
       @immutable_class_methods ||= []
-      raise RedifinitionError, "Method #{self}::#{sym.to_s} cannot be redefined" if @immutable_class_methods.include? sym
+      fail RedifinitionError, "Method #{self}::#{sym} cannot be redefined" if @immutable_class_methods.include? sym
       @immutable_class_methods << sym
       super
     end
 
-    def klass.singleton_method_removed(sym)
+    def singleton_method_removed(sym)
       super
-      raise RedifinitionError, "Method #{self}::#{sym.to_s} cannot be removed"
+      fail RedifinitionError, "Method #{self}::#{sym} cannot be removed"
     end
 
-    def klass.singleton_method_undefined(sym)
+    def singleton_method_undefined(sym)
       super
-      raise RedifinitionError, "Method #{self}::#{sym.to_s} cannot be undefined"
+      fail RedifinitionError, "Method #{self}::#{sym} cannot be undefined"
     end
-
   end
 end

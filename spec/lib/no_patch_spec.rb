@@ -6,7 +6,7 @@ describe NoPatch do
     end
   end
 
-  after(:each)do
+  after(:each) do
     Object.send(:remove_const, :Klass)
   end
 
@@ -29,6 +29,7 @@ describe NoPatch do
         def foo
           'initial'
         end
+
         def self.bar
           'end'
         end
@@ -112,7 +113,7 @@ describe NoPatch do
     end
 
     context 'inheriting from a class' do
-      after(:each)do
+      after(:each) do
         Object.send(:remove_const, :ChildKlass)
       end
 

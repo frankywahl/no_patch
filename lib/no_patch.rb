@@ -56,37 +56,37 @@ module NoPatch
   module ClassMethods
     def method_added(sym)
       @immutable_instance_methods ||= []
-      fail RedifinitionError, "Method #{self}##{sym} cannot be redefined" if @immutable_instance_methods.include? sym
+      raise RedifinitionError, "Method #{self}##{sym} cannot be redefined" if @immutable_instance_methods.include? sym
       @immutable_instance_methods << sym
       super
     end
 
     def method_removed(sym)
       super
-      fail RedifinitionError, "Method #{self}##{sym} cannot be removed"
+      raise RedifinitionError, "Method #{self}##{sym} cannot be removed"
     end
 
     def method_undefined(sym)
       super
-      fail RedifinitionError, "Method #{self}##{sym} cannot be undefined"
+      raise RedifinitionError, "Method #{self}##{sym} cannot be undefined"
     end
 
     # Heads up, this calls itself after being defined
     def singleton_method_added(sym)
       @immutable_class_methods ||= []
-      fail RedifinitionError, "Method #{self}::#{sym} cannot be redefined" if @immutable_class_methods.include? sym
+      raise RedifinitionError, "Method #{self}::#{sym} cannot be redefined" if @immutable_class_methods.include? sym
       @immutable_class_methods << sym
       super
     end
 
     def singleton_method_removed(sym)
       super
-      fail RedifinitionError, "Method #{self}::#{sym} cannot be removed"
+      raise RedifinitionError, "Method #{self}::#{sym} cannot be removed"
     end
 
     def singleton_method_undefined(sym)
       super
-      fail RedifinitionError, "Method #{self}::#{sym} cannot be undefined"
+      raise RedifinitionError, "Method #{self}::#{sym} cannot be undefined"
     end
   end
 end

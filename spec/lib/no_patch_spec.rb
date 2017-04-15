@@ -40,8 +40,7 @@ describe NoPatch do
       it 'can be defined' do
         expect do
           class Klass
-            def bar
-            end
+            def bar; end
           end
         end.not_to raise_error
       end
@@ -49,8 +48,7 @@ describe NoPatch do
       it 'raises an error when being redefined' do
         expect do
           class Klass
-            def foo
-            end
+            def foo; end
           end
         end.to raise_error NoPatch::RedifinitionError, 'Method Klass#foo cannot be redefined'
       end
@@ -76,8 +74,7 @@ describe NoPatch do
       it 'can be defined' do
         expect do
           class Klass
-            def self.super
-            end
+            def self.super; end
           end
         end.not_to raise_error
       end
@@ -85,8 +82,7 @@ describe NoPatch do
       it 'raises an error when being redefined' do
         expect do
           class Klass
-            def self.bar
-            end
+            def self.bar; end
           end
         end.to raise_error NoPatch::RedifinitionError, 'Method Klass::bar cannot be redefined'
       end

@@ -39,6 +39,6 @@ RuboCop::RakeTask.new do |task|
 end
 
 task test: :spec
-task default: [:spec, :rubocop]
+task default: %i[spec rubocop]
 
-task rebuild: [:build, :install]
+task rebuild: %i[build install]

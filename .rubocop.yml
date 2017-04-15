@@ -1,6 +1,6 @@
 AllCops:
   Exclude:
-    - no_patch.gemspec 
+    - no_patch.gemspec
 
 Documentation:
   Enabled: false
@@ -8,3 +8,7 @@ Documentation:
 LineLength:
   Enabled: true
   Max: 140
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb

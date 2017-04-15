@@ -12,3 +12,6 @@ LineLength:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

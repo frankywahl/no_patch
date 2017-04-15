@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NoPatch
   # A version object
   class Version
@@ -13,7 +15,7 @@ module NoPatch
     # Return the current version of SuperHooks
     # following the semantics versioning
     def self.to_s
-      [MAJOR, MINOR, PATCH, PRE].compact.join('.')
+      [MAJOR, MINOR, PATCH, PRE].compact.join(".")
     end
   end
 

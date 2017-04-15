@@ -1,4 +1,6 @@
-require 'no_patch/version'
+# frozen_string_literal: true
+
+require "no_patch/version"
 
 # The no patch module provides a way to avoid a class from being monkey patched.
 # An example of that would be shared code between two objects. You would not want

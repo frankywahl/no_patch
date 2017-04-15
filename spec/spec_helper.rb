@@ -1,5 +1,7 @@
-require 'pry'
-require 'no_patch'
+# frozen_string_literal: true
+
+require "pry"
+require "no_patch"
 
 RSpec.configure do |c|
   c.color = true

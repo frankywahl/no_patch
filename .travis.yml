@@ -1,7 +1,18 @@
+sudo: false
 language: ruby
 rvm:
   - "2.0"
   - "2.1"
   - "2.2"
-  - "2.3"
-script: bundle install && CODECLIMATE_REPO_TOKEN=23f00994b94c79b50de88e4ca0bbf67faaf18ce36b8f0cd421f2b8de0131bc25 bundle exec rake
+  - "2.3.3"
+  - "2.4.1"
+before_install: gem instal bundler
+script:
+  - bundle exec rake
+
+addons:
+  code_climate:
+    repo_token: 23f00994b94c79b50de88e4ca0bbf67faaf18ce36b8f0cd421f2b8de0131bc25
+
+after_success:
+  - bundle exec codeclimate-test-reporter

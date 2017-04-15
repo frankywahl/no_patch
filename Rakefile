@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "bundler/gem_tasks"
-require "rubygems"
+require "rspec/core/rake_task"
 
 begin
   require "bundler"
@@ -19,26 +19,7 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-require "rake"
-
-require "rubygems/tasks"
-Gem::Tasks.new do |tasks|
-  tasks.console.command = "pry"
-end
-
-require "rdoc/task"
-RDoc::Task.new do |rdoc|
-  rdoc.title = "NoPatch"
-end
-task doc: :rdoc
-
-require "rspec/core/rake_task"
-RSpec::Core::RakeTask.new
-
-require "rubocop/rake_task"
-RuboCop::RakeTask.new do |task|
-  task.requires << "rubocop-rspec"
-end
+Rake.add_rakelib("tasks")
 
 task test: :spec
 task default: %i[spec rubocop]
